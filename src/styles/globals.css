@@ -1,0 +1,351 @@
+/* ===================== */
+/* ASHHALAN DESIGN SYSTEM */
+/* ===================== */
+
+/* 1) GLOBAL COLORS (TOKENS) */
+:root {
+  /* Brand Palette */
+  --ruby-red: #A20E20;
+  --chinese-black: #111111;
+  --charleston-green: #282828;
+  --black-olive: #3D3D3D;
+  --pale-silver: #CCC8BD;
+  
+  /* Semantic Tokens */
+  --color-primary: #A20E20;
+  --color-secondary: #CCC8BD;
+  --color-text: #111111;
+  --color-accent: #282828;
+  
+  /* Surfaces & Backgrounds */
+  --color-background: #FFFFFF;
+  --color-surface-1: #FFFFFF;
+  --color-surface-2: #F7F6F3;
+  --color-border: #E6E2DA;
+  
+  /* Hover States */
+  --color-primary-hover: #8A0C1B;
+  --color-secondary-hover: #ADAAA1;
+  --color-accent-hover: #222222;
+  
+  /* 2) GLOBAL FONTS (TOKENS) */
+  --font-primary: "Nunito Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-secondary: "Lota Grotesque Alt 1", "Nunito Sans", system-ui, Arial, sans-serif;
+  --font-text: "Nunito Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-accent: "AirArabia Normal", "Tahoma", "Arial", sans-serif;
+  
+  /* Base Settings */
+  --font-size: 16px;
+  --radius: 12px;
+}
+
+/* Tailwind Theme Mapping */
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-text);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+  --color-surface-1: var(--color-surface-1);
+  --color-surface-2: var(--color-surface-2);
+  
+  /* Additional Tailwind mappings */
+  --color-card: var(--color-surface-1);
+  --color-card-foreground: var(--color-text);
+  --color-popover: var(--color-surface-1);
+  --color-popover-foreground: var(--color-text);
+  --color-primary-foreground: #FFFFFF;
+  --color-secondary-foreground: var(--color-text);
+  --color-muted: var(--color-surface-2);
+  --color-muted-foreground: var(--color-accent);
+  --color-accent-foreground: #FFFFFF;
+  --color-destructive: var(--color-primary);
+  --color-destructive-foreground: #FFFFFF;
+  --color-input: var(--color-surface-1);
+  --color-ring: var(--color-primary);
+  
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+}
+
+/* ===================== */
+/* 3) TYPOGRAPHY - BODY TEXT */
+/* ===================== */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  body {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: none;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 1.6;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Arabic Language Support */
+  body:lang(ar),
+  *:lang(ar) {
+    font-family: var(--font-accent);
+  }
+  
+  p {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: none;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 1.6;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    margin: 0 0 1rem 0;
+  }
+}
+
+/* ===================== */
+/* 4) LINKS */
+/* ===================== */
+@layer base {
+  a {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    font-style: normal;
+    text-decoration: none;
+    line-height: inherit;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: var(--color-primary);
+    transition: all 0.2s ease;
+  }
+  
+  a:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* ===================== */
+/* 5) HEADINGS (h1-h6) */
+/* ===================== */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary);
+    font-style: normal;
+    text-transform: none;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    word-spacing: 0px;
+    margin: 0 0 0.75rem 0;
+  }
+  
+  h1 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-primary);
+  }
+  
+  h2 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text);
+  }
+  
+  h3 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-text);
+  }
+  
+  h4 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-text);
+  }
+  
+  h5 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-text);
+  }
+  
+  h6 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-text);
+  }
+}
+
+/* ===================== */
+/* 6) BUTTONS */
+/* ===================== */
+.btn {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: none;
+  font-style: normal;
+  text-decoration: none;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  word-spacing: 0px;
+  color: #FFFFFF;
+  background: var(--color-primary);
+  box-shadow: 0 10px 24px rgba(17, 17, 17, 0.18);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  color: #FFFFFF;
+  background: var(--color-primary-hover);
+  box-shadow: 0 14px 30px rgba(17, 17, 17, 0.22);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+/* ===================== */
+/* 7) IMAGES */
+/* ===================== */
+.img {
+  border: none;
+  opacity: 1;
+  box-shadow: 0 10px 24px rgba(17, 17, 17, 0.12);
+  transition: all 0.3s ease;
+}
+
+.img:hover {
+  border: none;
+  opacity: 0.98;
+  box-shadow: 0 16px 40px rgba(17, 17, 17, 0.18);
+  filter: saturate(1.02) contrast(1.02);
+  transform: translateY(-2px);
+}
+
+/* ===================== */
+/* 8) FORM FIELDS */
+/* ===================== */
+@layer base {
+  label {
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: none;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    word-spacing: 0px;
+    color: var(--color-accent);
+    margin: 0 0 8px 0;
+    display: block;
+  }
+  
+  input,
+  textarea,
+  select {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: none;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 1.4;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: var(--color-text);
+    background-color: var(--color-surface-1);
+    border: 1px solid var(--color-border);
+    box-shadow: none;
+    border-radius: 12px;
+    padding: 12px 14px;
+    width: 100%;
+    transition: all 0.2s ease;
+    accent-color: var(--color-primary);
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    color: var(--color-text);
+    background-color: var(--color-surface-1);
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(162, 14, 32, 0.18);
+    outline: none;
+  }
+  
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: auto;
+    accent-color: var(--color-primary);
+  }
+}
+
+/* ===================== */
+/* 9) PAGE TRANSITIONS */
+/* ===================== */
+.page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 17, 17, 0.92);
+  background: radial-gradient(
+    circle at center,
+    rgba(162, 14, 32, 0.35) 0%,
+    rgba(17, 17, 17, 0.92) 50%,
+    rgba(17, 17, 17, 0.92) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  transform: translateY(-10px);
+}
+
+.page-transition.is-active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+/* ===================== */
+/* UTILITIES */
+/* ===================== */
+html {
+  font-size: var(--font-size);
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
