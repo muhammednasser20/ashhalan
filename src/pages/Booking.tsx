@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { cars } from '../data/cars';
-import { ArrowLeft, CreditCard, CheckCircle } from 'lucide-react';
+import { ArrowLeft, CreditCard, CheckCircle, Shield, Wifi, Map, Baby } from 'lucide-react';
+
+const ADD_ONS = [
+  { id: 'insurance', name: 'Full Insurance Coverage', price: 50, icon: Shield },
+  { id: 'wifi', name: 'Mobile WiFi Hotspot', price: 25, icon: Wifi },
+  { id: 'gps', name: 'GPS Navigation', price: 15, icon: Map },
+  { id: 'child_seat', name: 'Child Safety Seat', price: 20, icon: Baby },
+];
 
 export function Booking() {
   const { id } = useParams();
@@ -9,7 +16,7 @@ export function Booking() {
   const navigate = useNavigate();
   const car = cars.find((c) => c.id === id);
   
-  const { pickupDate, returnDate, days, totalPrice } = location.state || {};
+  const { pickupDate, returnDate, days, totalPrice, selectedAddons = [] } = location.state || {};
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -258,6 +265,26 @@ export function Booking() {
                   <span className="font-bold text-[var(--color-text)]">{days} days</span>
                 </div>
               </div>
+
+              {/* Add-ons Summary */}
+              {selectedAddons.length > 0 && (
+                <div className="space-y-3 mb-6 pb-6 border-b border-[var(--color-border)]">
+                  <h5 className="font-bold text-[var(--color-text)] mb-2">Selected Add-ons</h5>
+                  {selectedAddons.map((addonId: string) => {
+                    const addon = ADD_ONS.find(a => a.id === addonId);
+                    if (!addon) return null;
+                    return (
+                      <div key={addonId} className="flex justify-between text-sm">
+                        <div className="flex items-center gap-2">
+                          <addon.icon className="w-4 h-4 text-[var(--color-primary)]" />
+                          <span className="text-[var(--color-accent)]">{addon.name}</span>
+                        </div>
+                        <span className="font-bold text-[var(--color-text)]">{addon.price * days} SAR</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
 
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between">

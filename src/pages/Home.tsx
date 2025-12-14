@@ -51,35 +51,37 @@ export function Home() {
           </div>
 
           {/* Service Selection */}
-          <div className="bg-white rounded-2xl shadow-[0_16px_48px_rgba(17,17,17,0.2)] p-6 md:p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-[var(--color-text)] mb-6 text-center">Select Service</h3>
+          {/* Service Selection */}
+          {/* Service Selection */}
+          <div className="bg-white rounded-2xl shadow-[0_16px_48px_rgba(17,17,17,0.2)] p-5 md:p-6 max-w-4xl mx-auto">
+            <h3 className="text-xl font-bold text-[var(--color-text)] mb-4 text-center">Select Service</h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Daily Rent Option */}
               <button
                 onClick={() => handleServiceSelect('daily')}
-                className="p-8 border-2 border-[var(--color-border)] rounded-xl hover:border-[var(--color-primary)] hover:bg-[var(--color-surface-2)] transition-all group"
+                className="p-5 border-2 border-[var(--color-border)] rounded-xl hover:border-[var(--color-primary)] hover:bg-[var(--color-surface-2)] transition-all group"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-20 h-20 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <CarIcon className="w-10 h-10 text-white" strokeWidth={2.5} />
+                  <div className="w-16 h-16 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <CarIcon className="w-8 h-8 text-white" strokeWidth={2.5} />
                   </div>
-                  <h4 className="text-2xl font-bold text-[var(--color-text)] mb-2">Daily Rent</h4>
-                  <p className="text-[var(--color-accent)]">Daily/Weekly Rental</p>
+                  <h4 className="text-xl font-bold text-[var(--color-text)] mb-1">Daily Rent</h4>
+                  <p className="text-sm text-[var(--color-accent)]">Daily/Weekly Rental</p>
                 </div>
               </button>
 
               {/* Airport Option */}
               <button
                 onClick={() => handleServiceSelect('airport')}
-                className="p-8 border-2 border-[var(--color-border)] rounded-xl hover:border-[var(--color-primary)] hover:bg-[var(--color-surface-2)] transition-all group"
+                className="p-5 border-2 border-[var(--color-border)] rounded-xl hover:border-[var(--color-primary)] hover:bg-[var(--color-surface-2)] transition-all group"
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-20 h-20 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Plane className="w-10 h-10 text-white" strokeWidth={2.5} />
+                  <div className="w-16 h-16 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <Plane className="w-8 h-8 text-white" strokeWidth={2.5} />
                   </div>
-                  <h4 className="text-2xl font-bold text-[var(--color-text)] mb-2">Airport</h4>
-                  <p className="text-[var(--color-accent)]">Receive the car from airport</p>
+                  <h4 className="text-xl font-bold text-[var(--color-text)] mb-1">Airport</h4>
+                  <p className="text-sm text-[var(--color-accent)]">Receive the car from airport</p>
                 </div>
               </button>
             </div>

@@ -57,13 +57,21 @@ export function ServiceModal({ isOpen, onClose, serviceType }: ServiceModalProps
 
   if (!isOpen) return null;
 
+  const getTitle = () => {
+    switch(serviceType) {
+      case 'daily': return 'Daily Rental Service';
+      case 'airport': return 'Airport Service';
+      default: return 'Select Service';
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div className="bg-white rounded-2xl shadow-[0_20px_60px_rgba(17,17,17,0.3)] max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-[var(--color-border)] p-6 flex items-center justify-between rounded-t-2xl">
           <h2 className="text-2xl font-bold text-[var(--color-text)]">
-            {serviceType === 'daily' ? 'Daily Rental Service' : 'Airport Service'}
+            {getTitle()}
           </h2>
           <button
             onClick={handleClose}
@@ -106,7 +114,7 @@ export function ServiceModal({ isOpen, onClose, serviceType }: ServiceModalProps
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-[var(--color-text)] mb-2">Pickup</h3>
-                    <p className="text-[var(--color-accent)]">Pick up the car from the nearest branch to you.</p>
+                    <p className="text-sm text-[var(--color-accent)]">Pick up the car from the nearest branch to you.</p>
                   </div>
                 </div>
               </button>
@@ -241,6 +249,8 @@ export function ServiceModal({ isOpen, onClose, serviceType }: ServiceModalProps
               </div>
             </div>
           )}
+
+
         </div>
       </div>
     </div>

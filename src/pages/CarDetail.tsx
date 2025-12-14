@@ -1,7 +1,14 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { cars } from '../data/cars';
-import { Users, Fuel, Settings, Briefcase, Star, Check, ArrowLeft, Calendar } from 'lucide-react';
+import { Users, Fuel, Settings, Briefcase, Star, Check, ArrowLeft, Calendar, Shield, Wifi, Map, Baby } from 'lucide-react';
 import { useState } from 'react';
+
+const ADD_ONS = [
+  { id: 'insurance', name: 'Full Insurance Coverage', price: 50, icon: Shield },
+  { id: 'wifi', name: 'Mobile WiFi Hotspot', price: 25, icon: Wifi },
+  { id: 'gps', name: 'GPS Navigation', price: 15, icon: Map },
+  { id: 'child_seat', name: 'Child Safety Seat', price: 20, icon: Baby },
+];
 
 export function CarDetail() {
   const { id } = useParams();
@@ -10,6 +17,15 @@ export function CarDetail() {
   
   const [pickupDate, setPickupDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
+  const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
+
+  const toggleAddon = (id: string) => {
+    setSelectedAddons(prev => 
+      prev.includes(id) 
+        ? prev.filter(item => item !== id)
+        : [...prev, id]
+    );
+  };
 
   if (!car) {
     return (
@@ -34,7 +50,11 @@ export function CarDetail() {
   };
 
   const days = calculateDays();
-  const totalPrice = days * car.pricePerDay;
+  const addonsPricePerDay = selectedAddons.reduce((sum, id) => {
+    const addon = ADD_ONS.find(a => a.id === id);
+    return sum + (addon?.price || 0);
+  }, 0);
+  const totalPrice = days * (car.pricePerDay + addonsPricePerDay);
 
   return (
     <div className="min-h-screen bg-[var(--color-surface-2)]">
@@ -125,6 +145,59 @@ export function CarDetail() {
                 </div>
               </div>
 
+              {/* Optional Add-ons */}
+              <div className="mt-8">
+                <h3 className="text-xl font-bold text-[var(--color-text)] mb-4">Optional Add-ons</h3>
+                <div className="grid grid-cols-1 gap-4">
+                  {ADD_ONS.map((addon) => {
+                    const isSelected = selectedAddons.includes(addon.id);
+                    return (
+                      <div 
+                        key={addon.id}
+                        onClick={() => toggleAddon(addon.id)}
+                        className={`flex items-center justify-between p-5 rounded-2xl border transition-all duration-200 cursor-pointer group ${
+                          isSelected 
+                            ? 'bg-white border-[var(--color-primary)] shadow-md ring-1 ring-[var(--color-primary)]' 
+                            : 'bg-white border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-sm'
+                        }`}
+                      >
+                        <div className="flex items-center gap-5">
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${
+                            isSelected 
+                              ? 'bg-[var(--color-primary)] text-white' 
+                              : 'bg-[var(--color-surface-2)] text-[var(--color-accent)] group-hover:text-[var(--color-primary)]'
+                          }`}>
+                            <addon.icon className="w-6 h-6" />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-bold text-[var(--color-text)] mb-1">{addon.name}</h4>
+                            <p className="text-sm font-medium text-[var(--color-accent)]">
+                              + <span className="text-[var(--color-primary)] font-bold">{addon.price} SAR</span> / day
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {/* Selection Indicator */}
+                        <div className="flex items-center gap-3">
+                          <span className={`text-sm font-bold transition-colors ${
+                            isSelected ? 'text-[var(--color-primary)]' : 'text-[var(--color-accent)]'
+                          }`}>
+                            {isSelected ? 'Added' : 'Add'}
+                          </span>
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ${
+                            isSelected 
+                              ? 'bg-[var(--color-primary)] border-[var(--color-primary)]' 
+                              : 'border-[var(--color-border)] group-hover:border-[var(--color-primary)]'
+                          }`}>
+                            {isSelected && <Check className="w-4 h-4 text-white" strokeWidth={3} />}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
               {/* Vehicle Info */}
               <div className="mt-6 p-6 bg-[var(--color-surface-2)] rounded-xl">
                 <h3 className="text-xl font-bold text-[var(--color-text)] mb-4">Vehicle Information</h3>
@@ -195,9 +268,17 @@ export function CarDetail() {
                       <span className="text-[var(--color-accent)]">Number of days</span>
                       <span className="font-bold text-[var(--color-text)]">{days} days</span>
                     </div>
-                    <div className="pt-3 border-t border-[var(--color-border)] flex justify-between">
-                      <span className="font-bold text-[var(--color-text)]">Total</span>
-                      <span className="text-2xl font-bold text-[var(--color-primary)]">{totalPrice} SAR</span>
+                    <div className="pt-3 border-t border-[var(--color-border)] space-y-2">
+                      {selectedAddons.length > 0 && (
+                        <div className="flex justify-between text-sm">
+                          <span className="text-[var(--color-accent)]">Add-ons total</span>
+                          <span className="font-bold text-[var(--color-text)]">{addonsPricePerDay * days} SAR</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between pt-2">
+                        <span className="font-bold text-[var(--color-text)]">Total</span>
+                        <span className="text-2xl font-bold text-[var(--color-primary)]">{totalPrice} SAR</span>
+                      </div>
                     </div>
                   </>
                 )}
@@ -206,7 +287,7 @@ export function CarDetail() {
               {car.available ? (
                 <Link 
                   to={`/booking/${car.id}`}
-                  state={{ pickupDate, returnDate, days, totalPrice }}
+                  state={{ pickupDate, returnDate, days, totalPrice, selectedAddons }}
                   className="btn w-full text-center no-underline block"
                 >
                   Book Now
