@@ -15,7 +15,7 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 no-underline">
             <img
-              src="/logos/logo.png"
+              src={`${import.meta.env.BASE_URL}logos/logo.png`}
               alt="Ashhalan Car Rental"
               className="h-12 w-auto object-contain"
             />

@@ -9,7 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-2 mb-4 no-underline">
-              <img src="/logos/whitelogo.png" alt="Ashhalan Car Rental" className="h-12 w-auto object-contain" />
+              <img src={`${import.meta.env.BASE_URL}logos/whitelogo.png`} alt="Ashhalan Car Rental" className="h-12 w-auto object-contain" />
             </Link>
             <p className="text-sm text-[var(--color-secondary)] mb-4">
               Your trusted partner for premium car rental services across Saudi Arabia.
